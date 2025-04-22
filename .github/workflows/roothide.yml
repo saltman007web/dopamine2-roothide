@@ -73,6 +73,10 @@ jobs:
           mv ./Application/Dopamine.tipa  "./Application/roothide-Dopamine2-v${TAG}.tipa"
           echo "tag=${TAG}" >> $GITHUB_ENV
 
+      - name: Verify Artifact
+        run: |
+          if [ ! -f "${{ github.workspace }}/Application/roothide-Dopamine2-v${{ env.tag }}.tipa" ]; then  echo "Artifact not found"; exit 1; fi
+
       - name: Upload Artifact
         id: dopamine-latest-upload
         uses: actions/upload-artifact@v4
